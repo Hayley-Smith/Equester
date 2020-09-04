@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"><link th:href="@{/css/equester.css}" rel="stylesheet" /></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<h2>Edit Equine Profile</h2>
+
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label>Name</label>
+        <!-- TODO: add error spans  -->
+
+        <div><input type="text" th:field="${equine.equineName}" /></div>
+        <span th:errors="${equine.equineName}" class="error"></span>
+
+        <label>Height</label>
+        <div><input type="text" th:field="${equine.height}" /></div>
+
+        <label>Year of Birth</label>
+        <div><input type="text" th:field="${equine.yearOfBirth}" /></div>
+
+        <label>Weight</label>
+        <div><input type="text" th:field="${equine.weight}" /></div>
+
+    </div>
+    <div>
+        <label for="breeds">Choose one or more Breeds:</label>
+    </div>
+    <div>
+        <select name="breeds" id="breeds" multiple>
+            <option value="qh">QH</option>
+            <option value="tb">TB</option>
+            <option value="arab">Arabian</option>
+            <option value="poa">POA</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="colors">Choose a color:</label>
+    </div>
+    <div>
+        <select id="colors">
+            <option value="bay">Bay</option>
+            <option value="grey">Grey</option>
+            <option value="sorrel">Sorrel</option>
+            <option value="black">Black</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="sex">Choose a Sex:</label></div>
+    <div>
+        <select id="sex">
+            <option value="filly">Filly</option>
+            <option value="gelding">Gelding</option>
+            <option value="colt">Colt</option>
+            <option value="stallion">Stallion</option>
+            <option value="mare">Mare</option>
+        </select>
+    </div>
+
+    <div>
+        <label>
+        Description
+        </label>
+        <textarea class="form-control" th:field="${equine.description}" />
+    </div>
+
+    <div><label>In Foal?  <input type="checkbox" th:field="${equine.inFoal}" value=true /></label></div>
+
+    <div><label>Foal at Side?  <input type="checkbox" th:field="${equine.foalAtSide}" value=true/></label></div>
+
+    <div><label>At Stud?  <input type="checkbox" th:field="${equine.atStud}" value=true /></label></div>
+
+    <div><label>For Sale?  <input type="checkbox" th:field="${equine.forSale}" value=true /></label></div>
+
+    <div><label>For Lease?  <input type="checkbox" th:field="${equine.forLease}" value=true /></label></div>
+
+    <input type="submit" value="Save" />
+</form>
+
+
+</body>
+</html>
