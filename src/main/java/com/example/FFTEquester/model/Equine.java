@@ -2,67 +2,53 @@ package com.example.FFTEquester.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
 @Entity
 public class Equine extends AbstractEntity{
 
-    @NotBlank
     @Size(max = 100)
     private String equineName;
 
-
-    @NotBlank
-    @Size(max = 4)
     private int yearOfBirth;
 
-    @NotBlank
-    @Size(max = 10)
     private int height;
 
-    @NotBlank
-    @Size(max = 255)
     private int weight;
 
-    @NotBlank
     @ManyToOne
     private Sex sex;
-
 
     @ManyToOne
     private User user;
 
-    private boolean inFoal;
+    private Boolean inFoal = false;
 
-    private boolean foalAtSide;
+    private Boolean foalAtSide = false;
 
-    private boolean atStud;
+    private Boolean atStud = false;
 
-    @NotBlank
     @Size(max = 100)
     private String color;
 
-    @NotBlank
     @Size(max = 255)
     private String description;
 
-    private boolean forSale;
+    private Boolean forSale = false;
 
-    private boolean forLease;
+    private Boolean forLease = false;
 
-    @NotBlank
     @ManyToOne
     private Breed breed;
 
     public Equine() {
     }
 
-    public Equine(@NotBlank @Size(max = 100) String equineName, @NotBlank @Size(max = 4) int yearOfBirth, @NotBlank @Size(max = 10) int height,
-                  @NotBlank @Size(max = 255) int weight, @NotBlank Sex sex, User user, boolean inFoal, boolean foalAtSide, boolean atStud,
-                  @NotBlank @Size(max = 100) String color, @NotBlank @Size(max = 255) String description, boolean forSale, boolean forLease,
-                  @NotBlank Breed breed) {
+    public Equine(@Size(max = 100) String equineName, int yearOfBirth, int height, int weight,
+                  Sex sex, User user, Boolean inFoal, Boolean foalAtSide, Boolean atStud,
+                  @Size(max = 100) String color, @Size(max = 255) String description,
+                  Boolean forSale, Boolean forLease, Breed breed) {
         this.equineName = equineName;
         this.yearOfBirth = yearOfBirth;
         this.height = height;
@@ -127,27 +113,27 @@ public class Equine extends AbstractEntity{
         this.user = user;
     }
 
-    public boolean isInFoal() {
+    public Boolean getInFoal() {
         return inFoal;
     }
 
-    public void setInFoal(boolean inFoal) {
+    public void setInFoal(Boolean inFoal) {
         this.inFoal = inFoal;
     }
 
-    public boolean isFoalAtSide() {
+    public Boolean getFoalAtSide() {
         return foalAtSide;
     }
 
-    public void setFoalAtSide(boolean foalAtSide) {
+    public void setFoalAtSide(Boolean foalAtSide) {
         this.foalAtSide = foalAtSide;
     }
 
-    public boolean isAtStud() {
+    public Boolean getAtStud() {
         return atStud;
     }
 
-    public void setAtStud(boolean atStud) {
+    public void setAtStud(Boolean atStud) {
         this.atStud = atStud;
     }
 
@@ -167,19 +153,19 @@ public class Equine extends AbstractEntity{
         this.description = description;
     }
 
-    public boolean isForSale() {
+    public Boolean getForSale() {
         return forSale;
     }
 
-    public void setForSale(boolean forSale) {
+    public void setForSale(Boolean forSale) {
         this.forSale = forSale;
     }
 
-    public boolean isForLease() {
+    public Boolean getForLease() {
         return forLease;
     }
 
-    public void setForLease(boolean forLease) {
+    public void setForLease(Boolean forLease) {
         this.forLease = forLease;
     }
 

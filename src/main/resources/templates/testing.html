@@ -47,7 +47,7 @@
             <li><a href="#">For Lease</a></li>
         </ul>
         <div class="col-sm-3 sidenav">
-            <h1>Equine's Name</h1>
+            <h1 th:text="${equine.equineName}">Equine's Name</h1>
             <div>
                 <table>
                     <tr>
@@ -64,11 +64,11 @@
                     </tr>
                     <tr>
                         <td>Breed</td>
-                        <td th:text="${equine.yearOfBirth}">Quarter Horse</td>
+                        <td th:text="${equine.breed.breed}">Quarter Horse</td>
                     </tr>
                     <tr>
                         <td>Sex</td>
-                        <td th:text="${equine.sex}">Stallion</td>
+                        <td th:text="${equine.sex.sex}">Stallion</td>
                     </tr>
                     <tr>
                         <td>Color</td>
@@ -88,11 +88,11 @@
                     </tr>
                     <tr>
                         <td>For Sale?</td>
-                        <td th:text="${equine.yearOfBirth}">No</td>
+                        <td th:text="${equine.forSale}">No</td>
                     </tr>
                     <tr>
                         <td>For Lease?</td>
-                        <td th:text="${equine.yearOfBirth}">No</td>
+                        <td th:text="${equine.forLease}">No</td>
                     </tr>
                 </table>
             </div><br>
@@ -110,7 +110,7 @@
         <div class="col-sm-9">
 
 
-            <h1>Log an Event</h1>
+            <h3>Log an Event</h3>
 
             <form method="post" style="max-width:600px;">
                 <div class="form-group">

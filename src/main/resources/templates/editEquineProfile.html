@@ -7,33 +7,30 @@
 
 <h2>Edit Equine Profile</h2>
 
-<form method="post" style="max-width:600px;">
+<form method="post" action="#" th:action="@{/editEquineProfile}" th:object="${equine}" style="max-width:600px;">
     <div class="form-group">
-        <label>Name</label>
+        <label th:for="equineName">Name</label>
+        <input type="text" th:field="*{equineName}" />
+        <span th:errors="*{equineName}" class="error"></span>
+
         <!-- TODO: add error spans  -->
 
-        <div><input type="text" th:field="${equine.equineName}" /></div>
-        <span th:errors="${equine.equineName}" class="error"></span>
-
         <label>Height</label>
-        <div><input type="text" th:field="${equine.height}" /></div>
+        <div><input type="text" th:field="*{height}" /></div>
 
         <label>Year of Birth</label>
-        <div><input type="text" th:field="${equine.yearOfBirth}" /></div>
+        <div><input type="text" th:field="*{yearOfBirth}" /></div>
 
         <label>Weight</label>
-        <div><input type="text" th:field="${equine.weight}" /></div>
+        <div><input type="text" th:field="*{weight}" /></div>
 
     </div>
     <div>
-        <label for="breeds">Choose one or more Breeds:</label>
+        <label>Choose one or more Breeds:</label>
     </div>
     <div>
-        <select name="breeds" id="breeds" multiple>
-            <option value="qh">QH</option>
-            <option value="tb">TB</option>
-            <option value="arab">Arabian</option>
-            <option value="poa">POA</option>
+        <select name="breedId" id="breedId">
+            <option th:each="breedItem: ${breeds}" th:text="${breedItem.breed}" th:value="${breedItem.id}"/>
         </select>
     </div>
 
@@ -41,7 +38,7 @@
         <label for="colors">Choose a color:</label>
     </div>
     <div>
-        <select id="colors">
+        <select id="colors" th:field="*{color}">
             <option value="bay">Bay</option>
             <option value="grey">Grey</option>
             <option value="sorrel">Sorrel</option>
@@ -50,14 +47,10 @@
     </div>
 
     <div>
-        <label for="sex">Choose a Sex:</label></div>
+        <label>Choose a Sex:</label></div>
     <div>
-        <select id="sex">
-            <option value="filly">Filly</option>
-            <option value="gelding">Gelding</option>
-            <option value="colt">Colt</option>
-            <option value="stallion">Stallion</option>
-            <option value="mare">Mare</option>
+        <select name="sexId" id="sexId">
+            <option th:each="sexItem: ${sexes}" th:text="${sexItem.sex}" th:value="${sexItem.id}"/>
         </select>
     </div>
 
@@ -65,18 +58,18 @@
         <label>
         Description
         </label>
-        <textarea class="form-control" th:field="${equine.description}" />
+        <textarea class="form-control" th:field="*{description}" />
     </div>
 
-    <div><label>In Foal?  <input type="checkbox" th:field="${equine.inFoal}" value=true /></label></div>
+    <div><label>In Foal?  <input type="checkbox" th:field="*{inFoal}" /></label></div>
 
-    <div><label>Foal at Side?  <input type="checkbox" th:field="${equine.foalAtSide}" value=true/></label></div>
+    <div><label>Foal at Side?  <input type="checkbox" th:field="*{foalAtSide}" /></label></div>
 
-    <div><label>At Stud?  <input type="checkbox" th:field="${equine.atStud}" value=true /></label></div>
+    <div><label>At Stud?  <input type="checkbox" th:field="*{atStud}" /></label></div>
 
-    <div><label>For Sale?  <input type="checkbox" th:field="${equine.forSale}" value=true /></label></div>
+    <div><label>For Sale?  <input type="checkbox" th:field="*{forSale}" /></label></div>
 
-    <div><label>For Lease?  <input type="checkbox" th:field="${equine.forLease}" value=true /></label></div>
+    <div><label>For Lease?  <input type="checkbox" th:field="*{forLease}" /></label></div>
 
     <input type="submit" value="Save" />
 </form>

@@ -1,7 +1,9 @@
 package com.example.FFTEquester.controller;
 
 import com.example.FFTEquester.data.*;
+import com.example.FFTEquester.model.Breed;
 import com.example.FFTEquester.model.Equine;
+import com.example.FFTEquester.model.Sex;
 import com.example.FFTEquester.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -18,20 +20,15 @@ import java.security.Principal;
 import java.util.Optional;
 
 
-/*
- TO DO: create mapping for edit equine profile form
- TO DO: create mapping for process edit equine profile form
- TO DO: create mapping for viewing equine profile
- TODO: create mapping for deleting equine profile
- TODO: create mapping for Creating equine profile
-*/
-
 
 @Controller
 public class EquineController {
 
     @Autowired
     EventRepository eventRepository;
+
+    @Autowired
+    EventTypeRepository eventTypeRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -47,10 +44,15 @@ public class EquineController {
 
     private static final String userSessionKey = "user";
 
-
-    @RequestMapping("editEquineProfile")
+    @GetMapping("/editEquineProfile")
     public String renderEditEquineProfileForm(Model model){
-        model.addAttribute(new Equine());
+        Equine equine = new Equine();
+        model.addAttribute("equine", equine);
+        Iterable<Sex> sexes= sexRepository.findAll();
+        Iterable<Breed> breeds = breedRepository.findAll();
+
+        model.addAttribute("sexes", sexes);
+        model.addAttribute("breeds", breeds);
 
         return "editEquineProfile";
     }
@@ -71,46 +73,46 @@ public class EquineController {
     }
 
 
-    @PostMapping("editEquineProfile")
-    public String processAddSnippetForm(@ModelAttribute @Valid Equine newEquine,
-                                        Errors errors, Principal principal) {
+    @PostMapping("/editEquineProfile")
+    public String processAddEquineForm(@ModelAttribute("equine") @Valid Equine newEquine, Errors errors,
+                                       @RequestParam int breedId, @RequestParam int sexId,
+                                       Principal principal) {
         if (errors.hasErrors()) {
             return "editEquineProfile";
         }
 
+        System.out.println(breedId);
+
         String googlePrincipalName = principal.getName();
         User user = userRepository.findByGooglePrincipalName(googlePrincipalName);
 
+        Sex newSex = sexRepository.findById(sexId).get();
+        Breed newBreed = breedRepository.findById(breedId).get();
+
         newEquine.setUser(user);
+        newEquine.setSex(newSex);
+        newEquine.setBreed(newBreed);
         equineRepository.save(newEquine);
-        return "testing";
+        return "index";
     }
 
-    @GetMapping("equineProfile")
-    public String renderEquineProfile(Model model){
-        model.addAttribute(new Equine());
 
-        return "equineProfile";
-    }
 
     @GetMapping("equineProfilePrivate")
     public String renderEquineProfilePrivate(Model model){
-        model.addAttribute(new Equine());
-
         return "equineProfilePrivate";
     }
 
     @GetMapping("equineProfilePublic")
     public String renderEquineProfilePublic(Model model){
-        model.addAttribute(new Equine());
-
         return "equineProfilePublic";
     }
 
     @GetMapping("testing")
     public String renderTesting(Model model){
-        model.addAttribute(new Equine());
-
+        int id = 11;
+        model.addAttribute("equine", equineRepository.findById(id).get());
+       //model.addAttribute("equine", equineRepository.findById());
         return "testing";
     }
 

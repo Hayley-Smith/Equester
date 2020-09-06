@@ -13,6 +13,8 @@ public class Event extends AbstractEntity {
     @Size(max = 255)
     private String textEntry;
 
+    private String eventTitle;
+
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeStamp;
