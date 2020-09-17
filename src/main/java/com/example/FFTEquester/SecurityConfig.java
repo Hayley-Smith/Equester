@@ -10,7 +10,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
 
-        //redirects user to oauth2 provider which in this case is google
+        //redirects user to oauth2 provider - google
         httpSecurity
                 .antMatcher("/**").authorizeRequests()
                 .antMatchers("/").permitAll()

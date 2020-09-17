@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"><link th:href="@{/css/equester.css}" rel="stylesheet" /></head>
-<body class="container body-content">
-
+<head th:replace="fragments :: head"></head>
 <nav th:replace="fragments :: page-header"></nav>
+<body class="container body-content">
+<div th:fragment="add-event-form" class="form">
+    <h3>Log an Event</h3>
 
-<h1 th:text="eventTitle">Log an Event for "${equine.getEquineName()}"</h1>
+    <form method="post" action="#" th:action="@{/testing}" th:object="${event}" style="max-width:600px;">
+        <div class="form-group">
+            <div>
+                <label>Choose an Event Type:</label></div>
+            <div>
+                <select name="eventTypeId" id="eventTypeId">
+                    <option th:each="eventTypeItem: ${eventTypes}" th:text="${eventTypeItem.eventType}" th:value="${eventTypeItem.id}"/>
+                </select>
+            </div>
 
-<form method="post" style="max-width:600px;">
-    <div class="form-group">
-        <label th:for="event"></label>
-        <textarea class="form-control" th:field="${event.textEntry}" />
-        <span th:errors="${event.textEntry}" class="error"></span>
-    </div>
-
-    <input type="submit" value="Save Entry" />
-</form>
-
-
+            <div><label>Event Title</label></div>
+            <div><input type="text" class="form-control" /></div>
+            <div>
+                <label>
+                    Description
+                </label>
+                <div><textarea class="form-control" th:field="${event.textEntry}"></textarea></div>
+            </div>
+        </div>
+        <input type="submit" value="Save Entry" />
+    </form>
+</div>
 </body>
 </html>

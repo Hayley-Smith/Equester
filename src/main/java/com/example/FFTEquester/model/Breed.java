@@ -7,6 +7,13 @@ public class Breed extends AbstractEntity{
 
     private String breed;
 
+    public Breed() {
+    }
+
+    public Breed(String breed) {
+        this.breed = breed;
+    }
+
     public String getBreed() {
         return breed;
     }

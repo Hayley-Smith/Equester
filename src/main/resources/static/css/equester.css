@@ -1,6 +1,6 @@
 .body-content {
-    margin-top: 72px;
-    background-color: #ADD8E6;
+    margin-top: 10px;
+    background-color: lavender;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
@@ -31,6 +31,7 @@ footer {
 
 body {
     padding-top: 65px;
+    background-color: lavender;
 }
 
 td, th {

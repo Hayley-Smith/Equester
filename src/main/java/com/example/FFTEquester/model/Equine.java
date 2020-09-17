@@ -2,7 +2,10 @@ package com.example.FFTEquester.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -13,7 +16,7 @@ public class Equine extends AbstractEntity{
 
     private int yearOfBirth;
 
-    private int height;
+    private double height;
 
     private int weight;
 
@@ -42,13 +45,16 @@ public class Equine extends AbstractEntity{
     @ManyToOne
     private Breed breed;
 
+    @OneToMany(mappedBy = "equine")
+    private List<Event> events =new ArrayList<Event>();
+
     public Equine() {
     }
 
-    public Equine(@Size(max = 100) String equineName, int yearOfBirth, int height, int weight,
-                  Sex sex, User user, Boolean inFoal, Boolean foalAtSide, Boolean atStud,
-                  @Size(max = 100) String color, @Size(max = 255) String description,
-                  Boolean forSale, Boolean forLease, Breed breed) {
+    public Equine(@Size(max = 100) String equineName, int yearOfBirth, double height,
+                  int weight, Sex sex, User user, Boolean inFoal, Boolean foalAtSide,
+                  Boolean atStud, @Size(max = 100) String color, @Size(max = 255) String description,
+                  Boolean forSale, Boolean forLease, Breed breed, List<Event> events) {
         this.equineName = equineName;
         this.yearOfBirth = yearOfBirth;
         this.height = height;
@@ -63,6 +69,15 @@ public class Equine extends AbstractEntity{
         this.forSale = forSale;
         this.forLease = forLease;
         this.breed = breed;
+        this.events = events;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public String getEquineName() {
@@ -81,11 +96,11 @@ public class Equine extends AbstractEntity{
         this.yearOfBirth = yearOfBirth;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 

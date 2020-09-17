@@ -4,7 +4,15 @@ import javax.persistence.Entity;
 
 @Entity
 public class Sex extends AbstractEntity{
+
      private String sex;
+
+     public Sex(String sex) {
+          this.sex = sex;
+     }
+
+     public Sex() {
+     }
 
      public String getSex() {
           return sex;

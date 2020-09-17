@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <!-- Bootstrap stylesheets and script -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/equester.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <title th:text="'Equester' + ${title == null ? '' : ' :: ' + title}">Equester</title>
+</head>
+
+
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h2>
+                    Welcome to Equester
+                </h2>
+
+                    <button type="button" class="btn btn-lg btn-primary" th:action="@{/index}">
+                        Login
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        New around here?
+                    </h3>
+                    <button type="button" class="btn btn-lg btn-primary" th:href="@{/index}">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

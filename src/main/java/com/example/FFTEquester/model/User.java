@@ -16,6 +16,11 @@ public class User extends AbstractEntity{
 
     public User() {}
 
+    public User(String googlePrincipalName, List<Equine> equines) {
+        this.googlePrincipalName = googlePrincipalName;
+        this.equines = equines;
+    }
+
     public User(String googlePrincipalName) {
         this.googlePrincipalName = googlePrincipalName;
     }

@@ -7,9 +7,49 @@
 
 <body>
     <nav th:replace="fragments :: page-header"></nav>
-    <div class="container body-content">
-        <h2>Welcome To Equester</h2>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron jumbotron-fluid">
+                    <h2>
+                        Welcome to Equester
+                    </h2>
+                    <p>
+                        <a class="btn btn-primary btn-large" th:href="@{/userProfile}">About us</a>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote">
+                            <p class="mb-0">
+                                “Where in this wide world can man find nobility without pride, friendship without envy,
+                                or beauty without vanity? Here where grace is laced with muscle and strength by
+                                gentleness confined”
+                            </p>
+                            <footer class="blockquote-footer">
+                                Ronald Duncan in <cite>Ode to the Horse</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>
+                            Get Started!
+                        </h3>
+                        <a type="button" align="center" class="btn btn-lg btn-primary" th:href="@{/editEquineProfile}">
+                            Register an Equine
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>
+                            Questing for something?
+                        </h3>
+                        <button type="button" class="btn btn-lg btn-primary">
+                            Search Here
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

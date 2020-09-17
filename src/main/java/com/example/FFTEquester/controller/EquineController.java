@@ -1,54 +1,26 @@
 package com.example.FFTEquester.controller;
 
-import com.example.FFTEquester.data.*;
-import com.example.FFTEquester.model.Breed;
-import com.example.FFTEquester.model.Equine;
-import com.example.FFTEquester.model.Sex;
-import com.example.FFTEquester.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.FFTEquester.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Optional;
 
 
 
 @Controller
-public class EquineController {
+public class EquineController extends AbstractController{
 
-    @Autowired
-    EventRepository eventRepository;
-
-    @Autowired
-    EventTypeRepository eventTypeRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    BreedRepository breedRepository;
-
-    @Autowired
-    SexRepository sexRepository;
-
-    @Autowired
-    EquineRepository equineRepository;
-
-    private static final String userSessionKey = "user";
 
     @GetMapping("/editEquineProfile")
-    public String renderEditEquineProfileForm(Model model){
+    public String renderEditEquineProfileForm(Model model, Principal principal){
+        addMyEquines(model, principal);
         Equine equine = new Equine();
         model.addAttribute("equine", equine);
-        Iterable<Sex> sexes= sexRepository.findAll();
+        Iterable<Sex> sexes = sexRepository.findAll();
         Iterable<Breed> breeds = breedRepository.findAll();
 
         model.addAttribute("sexes", sexes);
@@ -57,35 +29,16 @@ public class EquineController {
         return "editEquineProfile";
     }
 
-    public User getUserFromSession(HttpSession session) {
-        String googlePrincipalName = (String) session.getAttribute(userSessionKey);
-        if (googlePrincipalName == null) {
-            return null;
-        }
-
-        Optional<User> user = Optional.ofNullable(userRepository.findByGooglePrincipalName(googlePrincipalName));
-
-        if (user.isEmpty()) {
-            return null;
-        }
-
-        return user.get();
-    }
-
-
     @PostMapping("/editEquineProfile")
     public String processAddEquineForm(@ModelAttribute("equine") @Valid Equine newEquine, Errors errors,
                                        @RequestParam int breedId, @RequestParam int sexId,
-                                       Principal principal) {
+                                       Principal principal, Model model) {
         if (errors.hasErrors()) {
             return "editEquineProfile";
         }
-
+        User user = getUserFromPrincipal(principal);
+        addMyEquines(model, principal);
         System.out.println(breedId);
-
-        String googlePrincipalName = principal.getName();
-        User user = userRepository.findByGooglePrincipalName(googlePrincipalName);
-
         Sex newSex = sexRepository.findById(sexId).get();
         Breed newBreed = breedRepository.findById(breedId).get();
 
@@ -96,25 +49,31 @@ public class EquineController {
         return "index";
     }
 
+    @GetMapping("equine/{equineId}")
+    public String displayEquineProfile(Model model, @PathVariable int equineId, Principal principal){
+        //System.out.println("Testing");
+        addMyEquines(model, principal);
+        model.addAttribute("equine", equineRepository.findById(equineId).get());
+        model.addAttribute(new Event());
+        Iterable<EventType> eventTypes = eventTypeRepository.findAll();
+        model.addAttribute("eventTypes", eventTypes);
+        Iterable<Event> events = eventRepository.findByEquineId(equineId);
 
-
-    @GetMapping("equineProfilePrivate")
-    public String renderEquineProfilePrivate(Model model){
-        return "equineProfilePrivate";
-    }
-
-    @GetMapping("equineProfilePublic")
-    public String renderEquineProfilePublic(Model model){
-        return "equineProfilePublic";
-    }
-
-    @GetMapping("testing")
-    public String renderTesting(Model model){
-        int id = 11;
-        model.addAttribute("equine", equineRepository.findById(id).get());
-       //model.addAttribute("equine", equineRepository.findById());
         return "testing";
     }
 
+
+    @GetMapping("testing")
+    public String renderTesting(Model model, Principal principal, Equine equine){
+        int id = 15;
+        String googlePrincipalName = principal.getName();
+        addMyEquines(model, principal);
+        model.addAttribute("equine", equineRepository.findById(id).get());
+        model.addAttribute(new Event());
+        Iterable<EventType> eventTypes = eventTypeRepository.findAll();
+
+        model.addAttribute("eventTypes", eventTypes);
+        return "testing";
+    }
 
     }
