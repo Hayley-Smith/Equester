@@ -6,6 +6,7 @@
     <!-- Bootstrap stylesheets and script -->
     <link th:href="@{/css/equester.css}" rel="stylesheet" />
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -15,8 +16,10 @@
 <body>
 
 <!-- header fragment -->
-<nav th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
+<nav th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top navbar-fluid">
+
+
+    <div>
         <div class="navbar-header">
             <a class="navbar-brand" th:href="@{/index}">E.Q.U.E.S.T.E.R</a>
         </div>
@@ -44,13 +47,8 @@
             <li>
                 <a th:href="@{/logout}">Logout</a>
             </li>
-
-
-
         </ul>
-
     </div>
-
 </nav>
 
 
@@ -93,7 +91,11 @@
 
 
 <div th:fragment="add-event-form" class="form">
-    <h3>Log an Event</h3>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Log an Event
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div class="well">
 
     <form method="post" action="#" th:action="@{/testing}" th:object="${event}" style="max-width:600px;">
         <div class="form-group">
@@ -116,6 +118,9 @@
         </div>
         <input type="submit" value="Save Entry" />
     </form>
+</div>
+
+    </div>
 </div>
 </body>
 
