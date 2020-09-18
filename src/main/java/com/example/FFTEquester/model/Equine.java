@@ -28,11 +28,23 @@ public class Equine extends AbstractEntity{
 
     private Boolean inFoal = false;
 
+    public String inFoalAsString(){
+        return booleanToString(inFoal);
+    }
+
     private Boolean foalAtSide = false;
+
+    public String foalAtSideAsString(){
+        return booleanToString(foalAtSide);
+    }
 
     private Boolean atStud = false;
 
-    @Size(max = 100)
+    public String atStudAsString(){
+        return booleanToString(atStud);
+    }
+
+
     private String color;
 
     @Size(max = 255)
@@ -40,13 +52,24 @@ public class Equine extends AbstractEntity{
 
     private Boolean forSale = false;
 
+
+    public String forSaleAsString(){
+        return booleanToString(forSale);
+    }
+
     private Boolean forLease = false;
+
+    public String forLeaseAsString(){
+        return booleanToString(forLease);
+    }
 
     @ManyToOne
     private Breed breed;
 
     @OneToMany(mappedBy = "equine")
     private List<Event> events =new ArrayList<Event>();
+
+
 
     public Equine() {
     }

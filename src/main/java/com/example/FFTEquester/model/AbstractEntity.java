@@ -21,6 +21,10 @@ public abstract class AbstractEntity {
         this.id = id;
     }
 
+    public String booleanToString(boolean trueOrFalse) {
+        return trueOrFalse ? "Yes" : "No";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

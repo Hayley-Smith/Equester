@@ -17,6 +17,9 @@ public abstract class AbstractController {
     EventRepository eventRepository;
 
     @Autowired
+    ColorRepository colorRepository;
+
+    @Autowired
     EventTypeRepository eventTypeRepository;
 
     @Autowired
@@ -44,9 +47,12 @@ public abstract class AbstractController {
         return user;
     }
 
-    public String booleanToString(boolean b) {
-        return b ? "yes" : "no";
+
+    public String booleanToString(boolean trueOrFalse ) {
+        return trueOrFalse ? "Yes" : "No";
     }
+
+
     User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         if (userId == null) {
