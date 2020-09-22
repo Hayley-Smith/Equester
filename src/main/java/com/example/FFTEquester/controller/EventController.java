@@ -39,15 +39,9 @@ public class EventController extends AbstractController{
         return "testing";
     }
 
+
+
     @RequestMapping("add")
-    public String displayAddEventForm(Model model) {
-
-
-
-        return "redirect:";
-    }
-
-    @PostMapping("add")
     public String processAddEventForm(@ModelAttribute @Valid Event newEvent,
                                       Errors errors, Principal principal, Model model, Equine equine) {
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="border border-light p-5">
+
+    <p class="h4 mb-4 text-center">Update the Database</p>
+
+
+    <label for="sexInput">Add Sex</label>
+    <input type="text" id="sexInput" class="form-control mb-4" placeholder="add a new sex to the database" th:field="${#}">
+
+    <label for="colorInput">Add Color</label>
+    <input type="text" id="colorInput" class="form-control mb-4" placeholder="add a new color to the database">
+
+    <label for="eventTypeInput">Add EventType</label>
+    <input type="text" id="eventTypeInput" class="form-control mb-4" placeholder="add event type to database">
+
+    <label for="breedInput">Add Breed</label>
+    <input type="text" id="breedInput" class="form-control mb-4" placeholder="add new breed to the database">
+
+    <button class="btn btn-info btn-block" type="submit">Save</button>
+</form>
+</body>
+</html>

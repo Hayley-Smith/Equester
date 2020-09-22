@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<nav th:replace="fragments :: page-header"></nav>
-<body class="container body-content">
+<nav th:replace="fragments :: page-header-two"></nav>
+<body>
+<div class="container body-content">
 
 
 
@@ -39,7 +40,7 @@
         <label>Choose a color:</label>
     </div>
     <div>
-        <select id="colorsID" name="colorsID">
+        <select id="colorId" name="colorId">
             <option th:each="colorItem: ${colors}" th:text="${colorItem.color}" th:value="${colorItem.id}"/>
         </select>
     </div>
@@ -72,6 +73,7 @@
     <input type="submit" value="Save" />
 </form>
 
-
+</div>
 </body>
+
 </html>

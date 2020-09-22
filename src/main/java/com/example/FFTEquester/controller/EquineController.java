@@ -22,29 +22,34 @@ public class EquineController extends AbstractController{
         model.addAttribute("equine", equine);
         Iterable<Sex> sexes = sexRepository.findAll();
         Iterable<Breed> breeds = breedRepository.findAll();
+        Iterable<Color> colors = colorRepository.findAll();
+
 
         model.addAttribute("sexes", sexes);
         model.addAttribute("breeds", breeds);
+        model.addAttribute("colors", colors);
 
         return "editEquineProfile";
     }
 
     @PostMapping("/editEquineProfile")
-    public String processAddEquineForm(@ModelAttribute("equine") @Valid Equine newEquine, Errors errors,
-                                       @RequestParam int breedId, @RequestParam int sexId,
+    public String processAddEquineForm(@ModelAttribute("equine") @Valid Equine newEquine, Errors errors, @RequestParam int sexId,
+                                       @RequestParam int breedId, @RequestParam int colorId,
                                        Principal principal, Model model) {
         if (errors.hasErrors()) {
             return "editEquineProfile";
         }
         User user = getUserFromPrincipal(principal);
         addMyEquines(model, principal);
-        System.out.println(breedId);
+
         Sex newSex = sexRepository.findById(sexId).get();
         Breed newBreed = breedRepository.findById(breedId).get();
+        Color newColor = colorRepository.findById(colorId).get();
 
         newEquine.setUser(user);
         newEquine.setSex(newSex);
         newEquine.setBreed(newBreed);
+        newEquine.setColor(newColor);
         equineRepository.save(newEquine);
         return "index";
     }
@@ -71,7 +76,6 @@ public class EquineController extends AbstractController{
         model.addAttribute("equine", equineRepository.findById(id).get());
         model.addAttribute(new Event());
         Iterable<EventType> eventTypes = eventTypeRepository.findAll();
-
         model.addAttribute("eventTypes", eventTypes);
         return "testing";
     }

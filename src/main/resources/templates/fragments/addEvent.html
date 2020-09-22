@@ -12,12 +12,12 @@
                 <label>Choose an Event Type:</label></div>
             <div>
                 <select name="eventTypeId" id="eventTypeId">
-                    <option th:each="eventTypeItem: ${eventTypes}" th:text="${eventTypeItem.eventType}" th:value="${eventTypeItem.id}"/>
+                    <option th:each="eventTypeItem: ${eventTypes}" th:text="${eventTypeItem.eventType}" th:value="${eventTypeItem.id}" th:field="${event.eventType}/>
                 </select>
             </div>
 
             <div><label>Event Title</label></div>
-            <div><input type="text" class="form-control" /></div>
+            <div><input type="text" class="form-control" th:field="${event.eventTitle}" /></div>
             <div>
                 <label>
                     Description
@@ -25,7 +25,7 @@
                 <div><textarea class="form-control" th:field="${event.textEntry}"></textarea></div>
             </div>
         </div>
-        <input type="submit" value="Save Entry" />
+        <input type="submit" value="Save Entry" th:href="@{/add} />
     </form>
 </div>
 </body>

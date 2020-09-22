@@ -1,7 +1,8 @@
 .body-content {
-    margin-top: 10px;
     background-color: lavender;
 }
+
+
 
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {height: 1500px}
@@ -11,6 +12,7 @@
     background-color: #f1f1f1;
     height: 100%;
 }
+
 
 /* Set black background color, white text and some padding */
 footer {
@@ -27,10 +29,11 @@ footer {
     }
     .row.content {height: auto;}
 }
-
+container-fluid {
+    background-color: lavender;
+}
 
 body {
-    padding-top: 65px;
     background-color: lavender;
 }
 

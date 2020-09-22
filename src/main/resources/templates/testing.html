@@ -10,18 +10,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
+    <nav th:replace="fragments :: page-header-two"></nav>
 <body>
-<nav th:replace="fragments :: page-header"></nav>
+
 <div class="container-fluid">
-    <div class="row content">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#">STATUS:</a></li>
-            <li><a href="#">Not For Sale</a></li>
-            <li><a href="#">Priced For Sale</a></li>
-            <li><a href="#">Accepting Offers</a></li>
-            <li><a href="#">For Lease</a></li>
-        </ul>
-        <div class="col-sm-3 sidenav">
+
+        <div class="col-sm-4 sidenav">
             <h1 th:text="${equine.equineName}">Equine's Name</h1>
             <div>
                 <table>
@@ -47,7 +41,7 @@
                     </tr>
                     <tr>
                         <td>Color</td>
-                        <td th:text="${equine.color}">Bay</td>
+                        <td th:text="${equine.color.color}">Bay</td>
                     </tr>
                     <tr>
                         <td>In Foal?</td>
@@ -81,10 +75,10 @@
         </span>
 <!--TODO: link edit equine button to edit form -->
 <!--TODO: get delete equine button working. make sure it asks if they want to do that for sure! -->
-            </div><div><input type="submit" value="Edit Equine" /><input type="submit" value="Delete Equine" /></div>
+            </div><br><div><input type="submit" value="Edit Equine" /><input type="submit" value="Delete Equine" /></div>
         </div>
 
-        <div class="col-sm-9">
+        <div class="col-sm-8">
 
 
             <!-- event form fragment -->
