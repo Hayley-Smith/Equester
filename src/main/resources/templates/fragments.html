@@ -139,14 +139,14 @@
     <div class="collapse" id="collapseExample">
         <div class="well">
 
-    <form method="post" action="#" th:action="@{/testing}" th:object="${event}" style="max-width:600px;">
+    <form method="post" action="#" th:action="|/equine/${equineId}|"  th:object="${event}" style="max-width:600px;">
         <div class="form-group">
             <div>
                 <label>Choose an Event Type:</label></div>
                 <div>
-            <select name="eventTypeId" id="eventTypeId">
-                <option th:each="eventTypeItem: ${eventTypes}" th:text="${eventTypeItem.eventType}" th:value="${eventTypeItem.id}"/>
-            </select>
+                    <select name="eventTypeId" id="eventTypeId">
+                        <option th:each="eventTypeItem: ${eventTypes}" th:text="${eventTypeItem.eventType}" th:value="${eventTypeItem.id}"/>
+                    </select>
                 </div>
 
             <div><label>Event Title</label></div>

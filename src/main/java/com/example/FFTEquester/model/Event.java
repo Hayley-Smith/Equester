@@ -39,7 +39,12 @@ public class Event extends AbstractEntity {
     public Event() {
     }
 
-    public Event(@NotBlank @Size(max = 255) String textEntry, Equine equine, String eventTitle, EventType eventType, Date timeStamp, User user) {
+    public Event(@NotBlank @Size(max = 255) String textEntry,
+                 Equine equine,
+                 String eventTitle,
+                 EventType eventType,
+                 Date timeStamp,
+                 User user) {
         this.textEntry = textEntry;
         this.equine = equine;
         this.eventTitle = eventTitle;

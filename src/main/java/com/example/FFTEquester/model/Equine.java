@@ -15,16 +15,25 @@ public class Equine extends AbstractEntity{
     private String equineName;
 
     private int yearOfBirth;
-    // make this a float maybe
+
     private double height;
 
     private int weight;
+
+    @ManyToOne
+    private Breed breed;
 
     @ManyToOne
     private Sex sex;
 
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Color color;
+
+    @Size(max = 255)
+    private String description;
 
     private Boolean inFoal = false;
 
@@ -44,14 +53,7 @@ public class Equine extends AbstractEntity{
         return booleanToString(atStud);
     }
 
-    @ManyToOne
-    private Color color;
-
-    @Size(max = 255)
-    private String description;
-
     private Boolean forSale = false;
-
 
     public String forSaleAsString(){
         return booleanToString(forSale);
@@ -63,8 +65,7 @@ public class Equine extends AbstractEntity{
         return booleanToString(forLease);
     }
 
-    @ManyToOne
-    private Breed breed;
+
 
     @OneToMany(mappedBy = "equine")
     private List<Event> events =new ArrayList<Event>();
@@ -74,9 +75,21 @@ public class Equine extends AbstractEntity{
     public Equine() {
     }
 
-    public Equine(@Size(max = 100) String equineName, int yearOfBirth, double height, int weight, Sex sex, User user,
-                  Boolean inFoal, Boolean foalAtSide, Boolean atStud, Color color, @Size(max = 255) String description,
-                  Boolean forSale, Boolean forLease, Breed breed, List<Event> events) {
+    public Equine(@Size(max = 100) String equineName,
+                  int yearOfBirth,
+                  double height,
+                  int weight,
+                  Sex sex,
+                  User user,
+                  Boolean inFoal,
+                  Boolean foalAtSide,
+                  Boolean atStud,
+                  Color color,
+                  @Size(max = 255) String description,
+                  Boolean forSale,
+                  Boolean forLease,
+                  Breed breed,
+                  List<Event> events) {
         this.equineName = equineName;
         this.yearOfBirth = yearOfBirth;
         this.height = height;
@@ -122,7 +135,7 @@ public class Equine extends AbstractEntity{
         return height;
     }
 
-    public void setHeight(Double height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
@@ -174,9 +187,6 @@ public class Equine extends AbstractEntity{
         this.atStud = atStud;
     }
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
 
     public Color getColor() {
         return color;

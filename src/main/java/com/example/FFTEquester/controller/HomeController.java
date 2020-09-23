@@ -11,19 +11,22 @@ import java.security.Principal;
 @Controller
 public class HomeController extends AbstractController {
     @GetMapping("/")
-    public String renderLandingPage(Model model, Principal principal){
+    public String renderLandingPage(Model model,
+                                    Principal principal){
         addMyEquines(model, principal);
         return "landingPage";
     }
 
     @GetMapping("/index")
-    public String renderHomePage(Model model, Principal principal){
+    public String renderHomePage(Model model,
+                                 Principal principal){
         addMyEquines(model, principal);
         return "index";
     }
 
     @GetMapping("/userProfile")
-    public String renderUserProfile(Model model, Principal principal){
+    public String renderUserProfile(Model model,
+                                    Principal principal){
         addMyEquines(model, principal);
         return "userProfile";
     }

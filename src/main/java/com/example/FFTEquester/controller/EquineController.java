@@ -8,15 +8,39 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-
+import java.sql.Timestamp;
 
 
 @Controller
 public class EquineController extends AbstractController{
 
+    public Model addToEquineModel(Model model,
+                                  int equineId,
+                                  Principal principal
+                                  ){
+        Iterable<Event> events = eventRepository.findByEquineId(equineId);
+        Equine equine = equineRepository.findById(equineId).get();
+
+        //add event form
+        Iterable<EventType> eventTypes = eventTypeRepository.findAll();
+        Event event = new Event();
+
+        //adds to model
+        addEvents(model, equine);
+        addMyEquines(model, principal);
+        model.addAttribute("equineId", equineId);
+        model.addAttribute("eventTypes", eventTypes);
+        model.addAttribute("event", event);
+        model.addAttribute("equine", equineRepository.findById(equineId).get());
+        model.addAttribute(new Event());
+
+        return model;
+    };
+
 
     @GetMapping("/editEquineProfile")
-    public String renderEditEquineProfileForm(Model model, Principal principal){
+    public String renderEditEquineProfileForm(Model model,
+                                              Principal principal){
         addMyEquines(model, principal);
         Equine equine = new Equine();
         model.addAttribute("equine", equine);
@@ -33,9 +57,13 @@ public class EquineController extends AbstractController{
     }
 
     @PostMapping("/editEquineProfile")
-    public String processAddEquineForm(@ModelAttribute("equine") @Valid Equine newEquine, Errors errors, @RequestParam int sexId,
-                                       @RequestParam int breedId, @RequestParam int colorId,
-                                       Principal principal, Model model) {
+    public String processAddEquineForm(@ModelAttribute("equine") @Valid Equine newEquine,
+                                       Errors errors,
+                                       @RequestParam int sexId,
+                                       @RequestParam int breedId,
+                                       @RequestParam int colorId,
+                                       Principal principal,
+                                       Model model) {
         if (errors.hasErrors()) {
             return "editEquineProfile";
         }
@@ -55,29 +83,45 @@ public class EquineController extends AbstractController{
     }
 
     @GetMapping("equine/{equineId}")
-    public String displayEquineProfile(Model model, @PathVariable int equineId, Principal principal){
-        //System.out.println("Testing");
-        addMyEquines(model, principal);
-        model.addAttribute("equine", equineRepository.findById(equineId).get());
-        model.addAttribute(new Event());
-        Iterable<EventType> eventTypes = eventTypeRepository.findAll();
-        model.addAttribute("eventTypes", eventTypes);
-        Iterable<Event> events = eventRepository.findByEquineId(equineId);
+    public String displayEquineProfile(Model model,
+                                       @PathVariable int equineId,
+                                       Principal principal){
+        addToEquineModel(model, equineId, principal);
 
         return "testing";
     }
 
 
-    @GetMapping("testing")
-    public String renderTesting(Model model, Principal principal, Equine equine){
-        int id = 15;
+    @PostMapping("equine/{equineId}")
+    public String processAddEventForm(@ModelAttribute @Valid Event newEvent,
+                                      @ModelAttribute @Valid EventType newEventType,
+                                      Errors errors,
+                                      Principal principal,
+                                      Model model,
+                                      @PathVariable int equineId,
+                                      @RequestParam int eventTypeId) {
+        if (errors.hasErrors()) {
+            return "redirect:";
+        }
+        System.out.println("Hello from the event form");
+        //process new event
+        Equine equine = equineRepository.findById(equineId).get();
+        addEvents(model, equine);
         String googlePrincipalName = principal.getName();
-        addMyEquines(model, principal);
-        model.addAttribute("equine", equineRepository.findById(id).get());
-        model.addAttribute(new Event());
-        Iterable<EventType> eventTypes = eventTypeRepository.findAll();
-        model.addAttribute("eventTypes", eventTypes);
+        User user = userRepository.findByGooglePrincipalName(googlePrincipalName);
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        newEvent.setTimeStamp(currentTime);
+        newEvent.setUser(user);
+        EventType eventType = eventTypeRepository.findById(eventTypeId).get();
+        newEvent.setEventType(eventType);
+        newEvent.setEquine(equine);
+        eventRepository.save(newEvent);
+
+        //load equine page
+        addToEquineModel(model, equineId, principal);
+
         return "testing";
     }
+
 
     }

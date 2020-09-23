@@ -1,6 +1,7 @@
 package com.example.FFTEquester.controller;
 
 import com.example.FFTEquester.data.*;
+import com.example.FFTEquester.model.Equine;
 import com.example.FFTEquester.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -36,7 +37,8 @@ public abstract class AbstractController {
 
     private static final String userSessionKey = "user";
 
-    public void addMyEquines(Model model, Principal principal){
+    public void addMyEquines(Model model,
+                             Principal principal){
         User user = getUserFromPrincipal(principal);
         model.addAttribute("myEquines", equineRepository.findByUser(user));
     }
@@ -45,6 +47,11 @@ public abstract class AbstractController {
         String googlePrincipalName = principal.getName();
         User user = userRepository.findByGooglePrincipalName(googlePrincipalName);
         return user;
+    }
+
+    public void addEvents(Model model,
+                          Equine equine){
+        model.addAttribute("myEvents", eventRepository.findByEquine(equine));
     }
 
 
