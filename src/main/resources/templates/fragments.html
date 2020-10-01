@@ -4,7 +4,6 @@
 <head th:fragment="head">
 
     <!-- Bootstrap stylesheets and script -->
-    <link th:href="@{/css/equester.css}" rel="stylesheet" />
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -66,7 +65,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">E.Q.U.E.S.T.E.R</a>
+                <a class="navbar-brand" href="#">EQUESTER</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
@@ -110,28 +109,17 @@
 
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading"><h5>Shoeing - Full set</h5></div>
-    <div class="panel-body"><h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5><hr>
-    <p> @GlenGFarrier came out and put a full set of shoes on Shadowfax today. Blah blah blah Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+<div th:block th:each="event : ${myEvents}" class="panel panel-info">
+    <div class="panel-heading"><h5 th:text="${event.eventTitle}">Shoeing - Full set</h5></div>
+    <div class="panel-body">
+    <p th:text="${event.textEntry}"> event description
         </p>
-        <div class="panel-footer"><p>Health and Maintenance</p></div>
+        <div class="panel-footer"><p th:text="${event.eventType.eventType}">Health and Maintenance</p>
+            <h5 th:text="${event.getFormattedDate()}" class="glyphicon glyphicon-time"> Post by Jane Dane, Sep 27, 2015.</h5></div>
     </div>
     <br>
 </div>
 
-    <div class="panel panel-success">
-        <div class="panel-heading">Weekend At Greensfelder Park!</div>
-        <div class="panel-body"><h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5><hr>
-            <p> Lovely Ride at Greensfelder Park with @JennyH and @KatyB Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <div class="panel-footer"><p>Trail Miles</p></div>
-        </div>
-        <br>
-    </div>
     <hr>
 </div>
 </div>

@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface EventRepository extends CrudRepository<Event, Integer> {
-    List<Event> findByEquine(Equine equine);
+    List<Event> findByEquineOrderByTimeStampDesc(Equine equine);
     List<Event> findByEquineId(int equineId);
     List<Event> findByEquineIdAndEventType(int equineId, EventType eventType);
 }

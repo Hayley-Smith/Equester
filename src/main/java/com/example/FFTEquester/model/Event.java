@@ -12,7 +12,7 @@ public class Event extends AbstractEntity {
     @NotBlank
     @Size(max = 255)
     private String textEntry;
-
+//TODO: add a warning about text entry length
     @ManyToOne
     private Equine equine;
 
@@ -26,10 +26,9 @@ public class Event extends AbstractEntity {
     private Date timeStamp;
 
     public String getFormattedDate() {
-        String s = new SimpleDateFormat("hh:mm a MM/dd/yyyy ").format(timeStamp);
+        String s = new SimpleDateFormat("M/d/yyyy h:mma ").format(timeStamp);
         return s;
     }
-
 
 
     @ManyToOne

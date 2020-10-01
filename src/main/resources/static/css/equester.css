@@ -1,5 +1,5 @@
 .body-content {
-    background-color: lavender;
+    background-color: #add8e6;
 }
 
 
@@ -17,7 +17,7 @@
 /* Set black background color, white text and some padding */
 footer {
     background-color: #555;
-    color: white;
+    color: #add8e6;
     padding: 15px;
 }
 
@@ -30,11 +30,11 @@ footer {
     .row.content {height: auto;}
 }
 container-fluid {
-    background-color: lavender;
+    background-color: #add8e6;
 }
 
 body {
-    background-color: lavender;
+    background-color: #add8e6;
 }
 
 td, th {
@@ -58,20 +58,6 @@ tr:nth-child(odd) {
     margin-right: auto;
 }
 
-table.job-listing {
-    margin: 30px auto;
-    border: 1px solid #e4e4e4;
-    width: 80%;
-}
-
-table.job-listing td:first-child {
-    font-weight: bold;
-}
-
-table.job-listing td:last-child {
-    width: 80%;
-}
-
 label {
     margin-right: 15px;
 }
@@ -90,11 +76,7 @@ p {
     margin-right: auto;
 }
 
-div.job-listing {
-    border: 1px solid #e4e4e4;
-    width: 80%;
-    background-color: #e4e4e4;
-}
+
 
 table {
     font-family: arial, sans-serif;

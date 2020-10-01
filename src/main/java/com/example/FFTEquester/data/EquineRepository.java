@@ -12,7 +12,9 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface EquineRepository extends CrudRepository<Equine, Integer> {
-   Optional<Equine> findById(Integer id);
+   Optional<Equine> findById(Integer id); // we
    List<Equine> findByUser(User user);
+
+
 }
 

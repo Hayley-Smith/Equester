@@ -123,5 +123,22 @@ public class EquineController extends AbstractController{
         return "testing";
     }
 
+    @GetMapping("/delete/{equineId}")
+    public String deleteEquine(Model model,
+                               @PathVariable int equineId,
+                               Principal principal){
+        Equine equine = equineRepository.findById(equineId).get();
+        equineRepository.delete(equine);
+        return "redirect:";
+    }
+
+    @GetMapping("/delete/{eventId}")
+    public String deleteEvent(Model model,
+                               @PathVariable int eventId,
+                               Principal principal){
+        Event event = eventRepository.findById(eventId).get();
+        eventRepository.delete(event);
+        return "redirect:";
+    }
 
     }

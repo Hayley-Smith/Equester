@@ -51,7 +51,7 @@ public abstract class AbstractController {
 
     public void addEvents(Model model,
                           Equine equine){
-        model.addAttribute("myEvents", eventRepository.findByEquine(equine));
+        model.addAttribute("myEvents", eventRepository.findByEquineOrderByTimeStampDesc(equine));
     }
 
 

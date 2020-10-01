@@ -16,7 +16,7 @@ public class Equine extends AbstractEntity{
 
     private int yearOfBirth;
 
-    private double height;
+    private Float height;
 
     private int weight;
 
@@ -77,7 +77,7 @@ public class Equine extends AbstractEntity{
 
     public Equine(@Size(max = 100) String equineName,
                   int yearOfBirth,
-                  double height,
+                  float height,
                   int weight,
                   Sex sex,
                   User user,
@@ -131,11 +131,11 @@ public class Equine extends AbstractEntity{
         this.yearOfBirth = yearOfBirth;
     }
 
-    public double getHeight() {
+    public Float getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(Float height) {
         this.height = height;
     }
 
