@@ -88,7 +88,7 @@ public class EquineController extends AbstractController{
                                        Principal principal){
         addToEquineModel(model, equineId, principal);
 
-        return "testing";
+        return "equineProfile";
     }
 
 
@@ -120,7 +120,7 @@ public class EquineController extends AbstractController{
         //load equine page
         addToEquineModel(model, equineId, principal);
 
-        return "testing";
+        return "equineProfile";
     }
 
     @GetMapping("/delete/{equineId}")
