@@ -103,7 +103,7 @@ public class EquineController extends AbstractController{
         if (errors.hasErrors()) {
             return "redirect:";
         }
-        System.out.println("Hello from the event form");
+
         //process new event
         Equine equine = equineRepository.findById(equineId).get();
         addEvents(model, equine);
@@ -127,12 +127,14 @@ public class EquineController extends AbstractController{
     public String deleteEquine(Model model,
                                @PathVariable int equineId,
                                Principal principal){
+        addToEquineModel(model, equineId, principal);
         Equine equine = equineRepository.findById(equineId).get();
+        eventRepository.deleteByEquine(equine);
         equineRepository.delete(equine);
-        return "redirect:";
+        return "index";
     }
 
-    @GetMapping("/delete/{eventId}")
+    @GetMapping("/delte/{eventId}")
     public String deleteEvent(Model model,
                                @PathVariable int eventId,
                                Principal principal){

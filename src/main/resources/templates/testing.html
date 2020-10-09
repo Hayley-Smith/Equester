@@ -4,7 +4,7 @@
 <head>
     <title>Equester</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -64,18 +64,33 @@
                         <td th:text="${equine.forLeaseAsString()}">No</td>
                     </tr>
                 </table>
-            </div><br>
+            </div>
 
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Event Feed..">
-                <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
+
 <!--TODO: link edit equine button to edit form -->
 <!--TODO: get delete equine button working. make sure it asks if they want to do that for sure! -->
-            </div><br><div><input type="submit" value="Edit Equine" /><input type="submit" value="Delete Equine" /></div>
+
+
+            <br>
+            <div>
+                <a th:href="@{/delete/{id}(id=${equine.id})}" class="btn btn-default button">Delete Equine</a>
+                <!--<input type="submit" value="Edit Equine" />
+                <input type="submit" value="Delete Equine" />-->
+            </div>
+            <br>
+
+
+
+
+                        <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search Event Feed..">
+                        <span class="input-group-btn">
+                             <button class="btn btn-default" type="button">
+                                 <span class="glyphicon glyphicon-search">
+                                 </span>
+                             </button>
+                        </span>
+                        </div>
         </div>
 
         <div class="col-sm-8">
@@ -104,7 +119,7 @@
                 </div>
 
 <footer class="container-fluid">
-    <p>Footer Text</p>
+    <br><p>"No hoof, No horse." - Some person</p>
 </footer>
 
 </body>
