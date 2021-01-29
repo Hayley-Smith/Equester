@@ -59,17 +59,19 @@
     <h4><extralarge>EVENT FEED</extralarge></h4>
     <hr>
     <h5>Filter events by type: </h5>
-    <h5><span class="label label-danger">General</span>
-        <span class="label label-primary">Health and Maintenance</span>
-        <span class="label label-success">Trail Miles</span>
-        <span class="label label-info">Competition</span>
-        <span class="label label-warning">Pleasure Ride/Drive</span>
-        <span class="label label-default">All Events</span></h5>
+    <h5>
+        <a th:href="@{/equine/{id}/20(id=${equine.id})}"><span class="label label-danger" >General</span></a>
+        <a th:href="@{/equine/{id}/22(id=${equine.id})}"><span class="label label-primary">Health and Maintenance</span></a>
+        <a th:href="@{/equine/{id}/23(id=${equine.id})}"><span class="label label-success">Trail Miles</span></a>
+        <a th:href="@{/equine/{id}/21(id=${equine.id})}"><span class="label label-info">Competition</span></a>
+        <a th:href="@{/equine/{id}/24(id=${equine.id})}"><span class="label label-warning">Pleasure Ride/Drive</span></a>
+        <a th:href="@{/equine/{id}(id=${equine.id})}"> <span class="label label-default">All Events</span></a>
+    </h5>
     <hr>
 
 
 
-<div th:block th:each="event : ${myEvents}" class="panel panel-info">
+<div th:block th:each="event : ${myEvents}" class="panel panel-default">
     <div class="panel-heading"><h5 th:text="${event.eventTitle}">Shoeing - Full set</h5></div>
     <div class="panel-body">
     <p th:text="${event.textEntry}"> event description

@@ -12,7 +12,8 @@ public class Event extends AbstractEntity {
     @NotBlank
     @Size(max = 255)
     private String textEntry;
-//TODO: add a warning about text entry length
+        //TODO: add a warning about text entry length
+        //TODO: error mapping for add event form
     @ManyToOne
     private Equine equine;
 

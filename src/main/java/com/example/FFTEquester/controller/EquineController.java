@@ -14,19 +14,34 @@ import java.sql.Timestamp;
 @Controller
 public class EquineController extends AbstractController{
 
+
+    // signature overloading
+
+    // events not filtered
     public Model addToEquineModel(Model model,
                                   int equineId,
                                   Principal principal
                                   ){
-        Iterable<Event> events = eventRepository.findByEquineId(equineId);
+    return addToEquineModel(model, equineId, principal, 0);
+    };
+
+    // events filtered
+    public Model addToEquineModel(Model model,
+                                  int equineId,
+                                  Principal principal,
+                                  int eventTypeId
+    ){
         Equine equine = equineRepository.findById(equineId).get();
+
+
+
 
         //add event form
         Iterable<EventType> eventTypes = eventTypeRepository.findAll();
         Event event = new Event();
 
         //adds to model
-        addEvents(model, equine);
+        addEvents(model, equine, eventTypeId);
         addMyEquines(model, principal);
         model.addAttribute("equineId", equineId);
         model.addAttribute("eventTypes", eventTypes);
@@ -38,6 +53,7 @@ public class EquineController extends AbstractController{
     };
 
 
+
     @GetMapping("/editEquineProfile")
     public String renderEditEquineProfileForm(Model model,
                                               Principal principal){
@@ -47,11 +63,13 @@ public class EquineController extends AbstractController{
         Iterable<Sex> sexes = sexRepository.findAll();
         Iterable<Breed> breeds = breedRepository.findAll();
         Iterable<Color> colors = colorRepository.findAll();
+        Iterable<Type> types = typeRepository.findAll();
 
 
         model.addAttribute("sexes", sexes);
         model.addAttribute("breeds", breeds);
         model.addAttribute("colors", colors);
+        model.addAttribute("types", types);
 
         return "editEquineProfile";
     }
@@ -62,6 +80,7 @@ public class EquineController extends AbstractController{
                                        @RequestParam int sexId,
                                        @RequestParam int breedId,
                                        @RequestParam int colorId,
+                                       @RequestParam int typeId,
                                        Principal principal,
                                        Model model) {
         if (errors.hasErrors()) {
@@ -73,11 +92,13 @@ public class EquineController extends AbstractController{
         Sex newSex = sexRepository.findById(sexId).get();
         Breed newBreed = breedRepository.findById(breedId).get();
         Color newColor = colorRepository.findById(colorId).get();
+        Type newType = typeRepository.findById(typeId).get();
 
         newEquine.setUser(user);
         newEquine.setSex(newSex);
         newEquine.setBreed(newBreed);
         newEquine.setColor(newColor);
+        newEquine.setType(newType);
         equineRepository.save(newEquine);
         return "index";
     }
@@ -90,6 +111,17 @@ public class EquineController extends AbstractController{
 
         return "equineProfile";
     }
+
+    @GetMapping("equine/{equineId}/{eventTypeId}")
+    public String displayEquineProfileFilteredByEventType(Model model,
+                                       @PathVariable int equineId,
+                                       @PathVariable int eventTypeId,
+                                       Principal principal){
+        addToEquineModel(model, equineId, principal, eventTypeId);
+
+        return "equineProfile";
+    }
+
 
 
     @PostMapping("equine/{equineId}")
@@ -106,7 +138,7 @@ public class EquineController extends AbstractController{
 
         //process new event
         Equine equine = equineRepository.findById(equineId).get();
-        addEvents(model, equine);
+        addEvents(model, equine, eventTypeId);
         String googlePrincipalName = principal.getName();
         User user = userRepository.findByGooglePrincipalName(googlePrincipalName);
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());

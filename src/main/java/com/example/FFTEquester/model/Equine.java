@@ -24,6 +24,9 @@ public class Equine extends AbstractEntity{
     private Breed breed;
 
     @ManyToOne
+    private Type type;
+
+    @ManyToOne
     private Sex sex;
 
     @ManyToOne
@@ -75,43 +78,22 @@ public class Equine extends AbstractEntity{
     public Equine() {
     }
 
-    public Equine(@Size(max = 100) String equineName,
-                  int yearOfBirth,
-                  float height,
-                  int weight,
-                  Sex sex,
-                  User user,
-                  Boolean inFoal,
-                  Boolean foalAtSide,
-                  Boolean atStud,
-                  Color color,
-                  @Size(max = 255) String description,
-                  Boolean forSale,
-                  Boolean forLease,
-                  Breed breed,
-                  List<Event> events) {
+    public Equine(@Size(max = 100) String equineName, int yearOfBirth, Float height, int weight, Breed breed, Type type, Sex sex, User user, Color color, @Size(max = 255) String description, Boolean inFoal, Boolean foalAtSide, Boolean atStud, Boolean forSale, Boolean forLease, List<Event> events) {
         this.equineName = equineName;
         this.yearOfBirth = yearOfBirth;
         this.height = height;
         this.weight = weight;
+        this.breed = breed;
+        this.type = type;
         this.sex = sex;
         this.user = user;
+        this.color = color;
+        this.description = description;
         this.inFoal = inFoal;
         this.foalAtSide = foalAtSide;
         this.atStud = atStud;
-        this.color = color;
-        this.description = description;
         this.forSale = forSale;
         this.forLease = forLease;
-        this.breed = breed;
-        this.events = events;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
         this.events = events;
     }
 
@@ -147,6 +129,22 @@ public class Equine extends AbstractEntity{
         this.weight = weight;
     }
 
+    public Breed getBreed() {
+        return breed;
+    }
+
+    public void setBreed(Breed breed) {
+        this.breed = breed;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public Sex getSex() {
         return sex;
     }
@@ -161,6 +159,22 @@ public class Equine extends AbstractEntity{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Boolean getInFoal() {
@@ -187,23 +201,6 @@ public class Equine extends AbstractEntity{
         this.atStud = atStud;
     }
 
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Boolean getForSale() {
         return forSale;
     }
@@ -220,11 +217,11 @@ public class Equine extends AbstractEntity{
         this.forLease = forLease;
     }
 
-    public Breed getBreed() {
-        return breed;
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public void setBreed(Breed breed) {
-        this.breed = breed;
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

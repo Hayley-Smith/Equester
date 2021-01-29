@@ -2,6 +2,7 @@ package com.example.FFTEquester.controller;
 
 import com.example.FFTEquester.data.*;
 import com.example.FFTEquester.model.Equine;
+import com.example.FFTEquester.model.EventType;
 import com.example.FFTEquester.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -35,6 +36,9 @@ public abstract class AbstractController {
     @Autowired
     EquineRepository equineRepository;
 
+    @Autowired
+    TypeRepository typeRepository;
+
     private static final String userSessionKey = "user";
 
     public void addMyEquines(Model model,
@@ -45,13 +49,20 @@ public abstract class AbstractController {
 
     public User getUserFromPrincipal(Principal principal){
         String googlePrincipalName = principal.getName();
+        System.out.println(googlePrincipalName);
         User user = userRepository.findByGooglePrincipalName(googlePrincipalName);
         return user;
     }
 
     public void addEvents(Model model,
-                          Equine equine){
-        model.addAttribute("myEvents", eventRepository.findByEquineOrderByTimeStampDesc(equine));
+                          Equine equine,
+                          int eventTypeId){
+        if (eventTypeId == 0){
+            model.addAttribute("myEvents", eventRepository.findByEquineOrderByTimeStampDesc(equine));
+        } else {
+            EventType eventType = eventTypeRepository.findById(eventTypeId).get();
+            model.addAttribute("myEvents", eventRepository.findByEquineAndEventTypeOrderByTimeStampDesc(equine, eventType));
+        };
     }
 
 

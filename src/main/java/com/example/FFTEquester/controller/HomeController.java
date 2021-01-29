@@ -4,7 +4,6 @@ import com.example.FFTEquester.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
@@ -20,6 +19,11 @@ public class HomeController extends AbstractController {
     @GetMapping("/index")
     public String renderHomePage(Model model,
                                  Principal principal){
+        String googlePrincipalName = principal.getName();
+        if (!userRepository.existsByGooglePrincipalName(googlePrincipalName)){
+            User newUser = new User(googlePrincipalName);
+            userRepository.save(newUser);
+        }
         addMyEquines(model, principal);
         return "index";
     }
@@ -33,17 +37,6 @@ public class HomeController extends AbstractController {
 
 
 
-    @RequestMapping(value = "/user")
-    public String user(Principal principal) {
-        String googlePrincipalName = principal.getName();
-        if (!userRepository.existsByGooglePrincipalName(googlePrincipalName)){
-            User newUser = new User(googlePrincipalName);
-            userRepository.save(newUser);
-        }
-
-
-        return "redirect:";
-    }
 
 
 

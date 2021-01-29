@@ -12,25 +12,29 @@
 </head>
     <nav th:replace="fragments :: page-header-two"></nav>
 <body>
-
 <div class="container-fluid">
-
         <div class="col-sm-4 sidenav">
             <h1 th:text="${equine.equineName}">Equine's Name</h1>
             <div>
                 <table class="table table-striped">
                     <tr>
                         <td>Height</td>
-                        <td th:text="${equine.height}">15.2</td>
+                        <td th:text="${equine.height}"></td>
                     </tr>
                     <tr>
                         <td>Year Of Birth</td>
-                        <td th:text="${equine.yearOfBirth}">2009</td>
+                        <td th:text="${equine.yearOfBirth}"></td>
                     </tr>
                     <tr>
                         <td>Weight</td>
                         <td th:text="${equine.weight}">1000lbs</td>
                     </tr>
+
+                    <tr>
+                        <td>Type</td>
+                        <td th:text="${equine.type.type}">zebra</td>
+                    </tr>
+
                     <tr>
                         <td>Breed</td>
                         <td th:text="${equine.breed.breed}">Quarter Horse</td>
@@ -65,12 +69,6 @@
                     </tr>
                 </table>
             </div>
-
-
-<!--TODO: link edit equine button to edit form -->
-<!--TODO: get delete equine button working. make sure it asks if they want to do that for sure! -->
-
-
             <br>
             <div>
                 <a th:href="@{/delete/{id}(id=${equine.id})}" class="btn btn-default button">Delete Equine</a>
@@ -78,10 +76,6 @@
                 <input type="submit" value="Delete Equine" />-->
             </div>
             <br>
-
-
-
-
                         <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search Event Feed..">
                         <span class="input-group-btn">
@@ -92,18 +86,12 @@
                         </span>
                         </div>
         </div>
-
         <div class="col-sm-8">
-
-
             <!-- event form fragment -->
             <br>
             <nav th:replace="fragments :: add-event-form"></nav>
-
             <!-- event feed fragment -->
             <nav th:replace="fragments :: event-feed"></nav>
-
-
             <nav aria-label="...">
                 <ul class="pagination pagination-lg">
                     <li class="page-item disabled">
